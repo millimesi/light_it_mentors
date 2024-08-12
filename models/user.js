@@ -16,7 +16,7 @@ const userSchema = new Schema(
     fatherName: { type: String, required: true },
     email: { type: String, unique: true },
     password: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
+    phoneNumber: { type: String },
   },
   { timestamps: true }, // Automatically adds createdAt and updatedAt time stam
   { versionKey: '__v' }, // Automatical creates and update version of the schema
