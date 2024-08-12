@@ -5,7 +5,7 @@ const insertRoutes = (api) => {
     api.get('/mentors', MentorController.getMentors);
 
     // retrives mentor of the specified Id
-    api.get('/mentors/:id', )
+    api.get('/mentors/:id', MentorController.getMentorByID);
 
     // Posts a mentor request with form data of user id and mentor Id
     api.post('/mentor_request', )

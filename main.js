@@ -26,8 +26,9 @@ async function postNewUser() {
     for (const mentor of mentorList ) {
 
         // find user with email
+        const newMentor = new Mentor(mentor);
         try {
-            const existingUser = await Mentor.findOne({ email: mentor.email})
+            const existingUser = await Mentor.findOne({ email: newMentor.email})
             if (existingUser) {
                 console.log('User exists', existingUser);
                 return;
@@ -37,7 +38,7 @@ async function postNewUser() {
         }
         // Save user
         try {
-            const insertInfo = await newUser.save();
+            const insertInfo = await newMentor.save();
             console.log(insertInfo._id.toString());
         } catch (err) {
             console.log(`Error: Database Insertion Erorr: ${err}`);
@@ -47,8 +48,8 @@ async function postNewUser() {
 
  ( async () => {
     await connnectToDb();
-    await Mentor.collection.drop();
-    // await postNewUser();
+    // await Mentor.collection.drop();
+    await postNewUser();
     mongoose.connection.close();
 }
 )();

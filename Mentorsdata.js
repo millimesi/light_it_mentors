@@ -10,6 +10,7 @@ const million = {
     mentorType: ['Academic Tutor', 'Life Skill Mentor'],
     city: 'Jimma',
     location: 'Ferenje Arada',
+    numberOfMentee: 3,
     rating: 8,
     reviews: [
       {
@@ -33,6 +34,7 @@ const million = {
     profileImage: '',
     phoneNumber: '0923269367',
     mentorType: ['Academic Tutor'],
+    numberOfMentee: 5,
     city: 'Jimma',
     location: 'Ferenje Arada',
     rating: 5,
@@ -61,6 +63,7 @@ const million = {
     city: 'Addis Ababa',
     location: 'Bole',
     rating: 7,
+    numberOfMentee: 2,
     reviews: [
       {
         userId: 'user5',

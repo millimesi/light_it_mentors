@@ -33,6 +33,7 @@ const mentorSchema = new Schema(
     city: { type: String, default: 'Jimma' },
     location: { type: [String], default: [] },
     rating: { type: Number, default: 1 },
+    numberOfMentee: { type: Number, default: 0 },
     reviews: [{
       userId: { type: String, default: '' },
       comment: { type: String, defalt: '' },
