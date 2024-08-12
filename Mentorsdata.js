@@ -1,0 +1,80 @@
+import sha1 from 'sha1';
+
+const million = {
+    name: 'Million',
+    fatherName: 'Meseret',
+    email: 'millionmesi1@gmail.com',
+    password: sha1('1234'),
+    profileImage: '',
+    phoneNumber: '0910120891',
+    mentorType: ['Academic Tutor', 'Life Skill Mentor'],
+    city: 'Jimma',
+    location: 'Ferenje Arada',
+    rating: 8,
+    reviews: [
+      {
+        userId: 'user1',
+        comment: 'Great mentor, very helpful and knowledgeable.',
+        rating: 9,
+      },
+      {
+        userId: 'user2',
+        comment: 'Provided excellent guidance, would recommend.',
+        rating: 8,
+      },
+    ],
+  };
+  
+  const yidiya = {
+    name: 'Yididia',
+    fatherName: 'Meseret',
+    email: 'yididiameseret89@gmail.com',
+    password: sha1('1234'),
+    profileImage: '',
+    phoneNumber: '0923269367',
+    mentorType: ['Academic Tutor'],
+    city: 'Jimma',
+    location: 'Ferenje Arada',
+    rating: 5,
+    reviews: [
+      {
+        userId: 'user3',
+        comment: 'Knowledgeable in the subject, but could be more engaging.',
+        rating: 6,
+      },
+      {
+        userId: 'user4',
+        comment: 'Helpful but lacked practical examples.',
+        rating: 5,
+      },
+    ],
+  };
+  
+  const mega = {
+    name: 'Mega',
+    fatherName: 'Kebede',
+    email: 'millimesi106@gmail.com',
+    password: sha1('1234'),
+    profileImage: '',
+    phoneNumber: '0912345678',
+    mentorType: ['Life Skill Mentor'],
+    city: 'Addis Ababa',
+    location: 'Bole',
+    rating: 7,
+    reviews: [
+      {
+        userId: 'user5',
+        comment: 'Insightful advice and very supportive.',
+        rating: 7,
+      },
+      {
+        userId: 'user6',
+        comment: 'Helped me a lot in setting life goals.',
+        rating: 8,
+      },
+    ],
+  };
+
+  
+const mentorList = [million, yidiya, mega];
+export default mentorList;
