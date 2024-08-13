@@ -49,7 +49,9 @@ async function postNewUser() {
  ( async () => {
     await connnectToDb();
     // await Mentor.collection.drop();
-    await postNewUser();
+    // await postNewUser();
+    // console.log(await User.find());
+    console.log(await MentorRequest.find())
     mongoose.connection.close();
 }
 )();

@@ -1,5 +1,7 @@
 import MentorController from "../controllers/mentorcontroller.js";
 import UserController from "../controllers/usercontroller.js";
+import MentorRequestController from "../controllers/mentorrequestcontroller.js";
+import User from "../models/user.js";
 
 const insertRoutes = (api) => {
     // retrives list of paginated mentors
@@ -9,13 +11,13 @@ const insertRoutes = (api) => {
     api.get('/mentors/:id', MentorController.getMentorByID);
 
     // Posts a mentor request with form data of user id and mentor Id
-    api.post('/mentor_request', )
+    api.post('/mentor_request', MentorRequestController.postMentorRequest);
 
     // retrives specific mentor request by Id
-    api.get('/mentor_request/:id', )
+    api.get('/mentor_request/:id', MentorRequestController.getMentorRequestById);
 
     // updates the mentor request details with id
-    api.put('/mentor_request/:id', )
+    // api.put('/mentor_request/:id', )
 
     // create new user account with form data
     api.post('/users', UserController.postNewUser);
@@ -27,7 +29,7 @@ const insertRoutes = (api) => {
     api.put('/users/:id', UserController.updateUserById)
     
     // deletes the user account
-    // api.delete('/users/:id', )
+    api.delete('/users/:id', UserController.deleteById)
 }
 
 export default insertRoutes;

@@ -17,14 +17,15 @@ const mentorRequestSchema = new Schema(
     userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     mentorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Mentor', required: true },
     menteeFullName: { type: String, required: true },
+    message: { type: String },
     location: { type: String },
     status: {
       type: String,
       enum: {
-        values: ['pending', 'accepted', 'rejected'],
+        values: ['pending', 'accepted', 'rejected', 'Declined'],
         message: '{VALUE} is not supported',
       },
-      required: true,
+      default: 'pending'
     },
   },
   { timestamps: true }, // Automatically adds createdAt and updatedAt time stamp
