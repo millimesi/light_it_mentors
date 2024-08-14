@@ -1,0 +1,60 @@
+# Get Mentors list
+GET http://0.0.0.0:5000/mentors
+
+###
+
+# Get user with Id
+GET http://0.0.0.0:5000/mentors/66b9cbb0b25f6ae914320057
+
+###
+
+# Create User with JSON data
+POST http://0.0.0.0:5000/users
+Content-Type: application/json
+
+{
+  "name": "yidiya",
+  "fatherName": "Meseret",
+  "email": "yididiyameseret89@gmail.com",
+  "password": "1234",
+  "phoneNumber": "0910120891"
+}
+
+###
+
+# Get user by Id
+GET http://0.0.0.0:5000/users/66bc8ef99ac4b76c0518e0da
+
+###
+
+# Update the user with Id
+PUT http://0.0.0.0:5000/users/66bc8ef99ac4b76c0518e0da
+Content-Type: application/json
+
+{
+  "name": "million"
+}
+
+###
+
+# Delete the user by Id
+DELETE http://0.0.0.0:5000/users/66ba4b93052409c490d8e833
+
+###
+
+# Create new mentor request
+POST http://0.0.0.0:5000/mentor_request
+Content-Type: application/json
+
+{
+  "userId": "66ba5400a95285b61805c4d5",
+  "mentorId": "66b9cbb0b25f6ae914320057",
+  "menteeFullName": "Abigiya Meseret",
+  "location": "Ferenje Arada",
+  "message": "Hello I need a math tutor"
+}
+
+###
+
+# Get mentor request with Id
+GET http://0.0.0.0:5000/mentor_request/66bb9d816a8da1e262ecbcbe

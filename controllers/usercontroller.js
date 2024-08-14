@@ -1,7 +1,7 @@
 // User endpoints controllers
 import User from '../models/user.js';
 import DbClient from '../utils/db.js';
-import sha1 from 'sha1';
+import bcrypt from 'bcrypt'
 
 export default class UserController {
     /**
@@ -45,7 +45,7 @@ export default class UserController {
 
         // if the user is not find
         // hash the password
-        data.password = sha1(data.password);
+        data.password = await bcrypt.hash(data.password, 10);
         
         // save the user to the data base
         try {
@@ -77,9 +77,13 @@ export default class UserController {
             if (!user) {
                 return res.status(400).json({ error: 'user not found'});
             }
-
+            
+            // remove the password from the user 
+            const userWithOutPassword = user.toObject();
+            delete userWithOutPassword.password
+    
             // else send the user data    
-            res.status(200).json({ user });
+            res.status(200).json({ user: userWithOutPassword });
         } catch (err) {
             console.log(`Error ${err}`);
             res.status(500).json({ error: 'server error occured'})
@@ -117,8 +121,6 @@ export default class UserController {
                                                        // run validation on the update data
             );
 
-            console.log(updateInfo)
-
             res.status(200).json({ message: 'user updated successfully' });
         } catch (err) {
             console.log(`Error: ${err}`);
@@ -129,7 +131,7 @@ export default class UserController {
 
    static async deleteById(req, res){
         console.log('DELETE /users/:id is Accessed');
-        
+
         // Get the Id
         const userid = req.params.id;
 

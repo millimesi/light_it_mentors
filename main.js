@@ -48,10 +48,11 @@ async function postNewUser() {
 
  ( async () => {
     await connnectToDb();
-    // await Mentor.collection.drop();
+    console.log(await User.find());
+    await User.collection.drop();
     // await postNewUser();
-    // console.log(await User.find());
-    console.log(await MentorRequest.find())
+    console.log(await User.find());
+    // console.log(await MentorRequest.find())
     mongoose.connection.close();
 }
 )();
