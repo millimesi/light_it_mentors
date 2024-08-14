@@ -2,6 +2,7 @@ import MentorController from "../controllers/mentorcontroller.js";
 import UserController from "../controllers/usercontroller.js";
 import MentorRequestController from "../controllers/mentorrequestcontroller.js";
 import User from "../models/user.js";
+import authenticateToken from '../utils/midlewares.js';
 
 const insertRoutes = (api) => {
     // retrives list of paginated mentors
@@ -22,8 +23,11 @@ const insertRoutes = (api) => {
     // create new user account with form data
     api.post('/users', UserController.postNewUser);
 
+    // login by authenticating the password
+    api.post('/users/login', UserController.userLogin)
+
     // retrives user account with specific id
-    api.get('/users/:id', UserController.getUserById)
+    api.get('/users/:id', authenticateToken, UserController.getUserById)
 
     // updates the user account with specific id
     api.put('/users/:id', UserController.updateUserById)

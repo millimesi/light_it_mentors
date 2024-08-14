@@ -1,7 +1,14 @@
 // User endpoints controllers
 import User from '../models/user.js';
 import DbClient from '../utils/db.js';
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
+import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+
+import authenticateToken from '../utils/midlewares.js';
+
+
+dotenv.config();
 
 export default class UserController {
     /**
@@ -129,7 +136,7 @@ export default class UserController {
     }
 
 
-   static async deleteById(req, res){
+    static async deleteById(req, res){
         console.log('DELETE /users/:id is Accessed');
 
         // Get the Id
@@ -152,4 +159,39 @@ export default class UserController {
             res.status(500).json({ error: 'Server error occurred' });
         }
     }
+
+    static async userLogin(req, res) {
+        console.log('POST /users/login is Accessed');
+
+        // get the password and user email from the request body
+        const reqEmail = req.body.email;
+        const reqPassword = req.body.password;
+
+        // find the user from the database
+        try{
+            const user = await User.findOne({ email: reqEmail });
+             
+            // console.log(user);
+            // if user is null retun not found error
+            if (!user) {
+                return res.status(400).json({ error: 'user not found'});
+            }
+
+            // if user found comare the password with reqPassword by bcrypt
+            // if comparision passes respond login sussesfull else incorrect password
+            if(!(await bcrypt.compare(reqPassword, user.password))) {
+                return res.status(400).json({ error: 'incorrect password' })
+            }
+
+
+            // create jwt ( access token)
+            const jwtpayload = { email: user.email };
+            const accessToken = jwt.sign(jwtpayload, process.env.ACCESS_TOKEN_SECRET)             
+
+            res.status(200).json({ message: 'login successful', accessToken})
+        } catch (err) {
+            console.log(`Error: ${err}`);
+            res.status(500).json({ error: 'Server error occurred' });
+        }
+    } 
 }
