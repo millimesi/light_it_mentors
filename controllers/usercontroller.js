@@ -185,7 +185,7 @@ export default class UserController {
 
             // create jwt ( access token)
             const jwtpayload = { email: user.email };
-            const accessToken = jwt.sign(jwtpayload, process.env.ACCESS_TOKEN_SECRET)   // { expiresIn: '15m' }           
+            const accessToken = jwt.sign(jwtpayload, process.env.ACCESS_TOKEN_SECRET)   // is not set { expiresIn: '15m' }           
 
             res.status(200).json({ message: 'login successful', accessToken})
         } catch (err) {

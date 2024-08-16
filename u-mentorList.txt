@@ -1,0 +1,108 @@
+[
+  {
+    "_id": "66b9cbafb25f6ae914320050",
+    "name": "Million",
+    "fatherName": "Meseret",
+    "email": "millionmesi1@gmail.com",
+    "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",
+    "profileImage": "",
+    "phoneNumber": "0910120891",
+    "mentorType": [
+      "Academic Tutor",
+      "Life Skill Mentor"
+    ],
+    "city": "Jimma",
+    "location": [
+      "Ferenje Arada"
+    ],
+    "rating": 8,
+    "numberOfMentee": 3,
+    "reviews": [
+      {
+        "userId": "user1",
+        "comment": "Great mentor, very helpful and knowledgeable.",
+        "rating": 9,
+        "_id": "66b9cbafb25f6ae914320051"
+      },
+      {
+        "userId": "user2",
+        "comment": "Provided excellent guidance, would recommend.",
+        "rating": 8,
+        "_id": "66b9cbafb25f6ae914320052"
+      }
+    ],
+    "createdAt": "2024-08-12T08:45:36.031Z",
+    "updatedAt": "2024-08-12T08:45:36.031Z",
+    "__v": 0
+  },
+  {
+    "_id": "66b9cbb0b25f6ae914320057",
+    "name": "Yididia",
+    "fatherName": "Meseret",
+    "email": "yididiameseret89@gmail.com",
+    "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",
+    "profileImage": "",
+    "phoneNumber": "0923269367",
+    "mentorType": [
+      "Academic Tutor"
+    ],
+    "city": "Jimma",
+    "location": [
+      "Ferenje Arada"
+    ],
+    "rating": 5,
+    "numberOfMentee": 5,
+    "reviews": [
+      {
+        "userId": "user3",
+        "comment": "Knowledgeable in the subject, but could be more engaging.",
+        "rating": 6,
+        "_id": "66b9cbb0b25f6ae914320058"
+      },
+      {
+        "userId": "user4",
+        "comment": "Helpful but lacked practical examples.",
+        "rating": 5,
+        "_id": "66b9cbb0b25f6ae914320059"
+      }
+    ],
+    "createdAt": "2024-08-12T08:45:36.215Z",
+    "updatedAt": "2024-08-12T08:45:36.215Z",
+    "__v": 0
+  },
+  {
+    "_id": "66b9cbb0b25f6ae91432005c",
+    "name": "Mega",
+    "fatherName": "Kebede",
+    "email": "millimesi106@gmail.com",
+    "password": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220",
+    "profileImage": "",
+    "phoneNumber": "0912345678",
+    "mentorType": [
+      "Life Skill Mentor"
+    ],
+    "city": "Addis Ababa",
+    "location": [
+      "Bole"
+    ],
+    "rating": 7,
+    "numberOfMentee": 14,
+    "reviews": [
+      {
+        "userId": "user5",
+        "comment": "Insightful advice and very supportive.",
+        "rating": 7,
+        "_id": "66b9cbb0b25f6ae91432005d"
+      },
+      {
+        "userId": "user6",
+        "comment": "Helped me a lot in setting life goals.",
+        "rating": 8,
+        "_id": "66b9cbb0b25f6ae91432005e"
+      }
+    ],
+    "createdAt": "2024-08-12T08:45:36.233Z",
+    "updatedAt": "2024-08-16T01:57:46.054Z",
+    "__v": 0
+  }
+]

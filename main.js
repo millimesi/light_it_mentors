@@ -3,6 +3,7 @@ import Mentor from "./models/mentor.js";
 import MentorRequest from "./models/mentorRequest.js";
 import mongoose from "mongoose";
 import mentorList from "./Mentorsdata.js";
+import fs from 'fs';
 
 // Get inforamtion about the database connection paramater
 const host = process.env.DB_HOST || 'localhost'; 
@@ -46,13 +47,26 @@ async function postNewUser() {
     }
 }
 
+function writeToFile(fileName, data){
+    const jsonFormatted = JSON.stringify(data, null, 2);
+    try {
+        fs.writeFileSync(fileName, jsonFormatted);
+        console.log('File written successfully');
+      } catch (err) {
+        console.error('Error writing to file:', err);
+      }
+}
+
  ( async () => {
     await connnectToDb();
-    console.log(await User.find());
-    // await User.collection.drop();
-    // await postNewUser();
     // console.log(await User.find());
+    await MentorRequest.collection.drop();
+    // await postNewUser();
+    // const data = await User.find();
+    // const data = await Mentor.find();
+    const data = await MentorRequest.find();
     // console.log(await MentorRequest.find())
+    writeToFile('u-requestList.txt', data);
     mongoose.connection.close();
 }
 )();

@@ -108,7 +108,7 @@ export default class MentorRequestController {
         }
     }
 
-    static async updateRequestStatus(req, res) {
+    static async processRequestStatus(req, res) {
         console.log('PUT /mentor_request/:id/:status is Accessed')
         
         // get the parmateres from the request
@@ -141,7 +141,30 @@ export default class MentorRequestController {
 
             // if the status of the updated is rejected send request rejected
             if (updatedRequest.status === 'rejected') {
+
+                // send email to the user to notify is requset is rejected by the mentor
+                // get the requesting user
+                const requestingUser = await User.findOne({ _id: updatedRequest.userId });
+
+                // get the requested mentor
+                const mentorId = updatedRequest.mentorId;
+                const mentorRequested = await Mentor.findOne({ _id: mentorId });
+
+                const userEmail = requestingUser.email;
+                const emailSubject = "Your request for mentor is rejected!"
+                const emailhtmlBody = `
+                    <html>
+                    <body>
+                        <p> Dear ${requestingUser.name} your request to Mentor ${mentorRequested.name} is <b>rejected</b>.</p>
+                        <p><strong>Kindly look for another mentor and send a request.</strong></p>
+                    </body>
+                    </html>
+                `;
+    
+                await sendEmail(userEmail, emailSubject, emailhtmlBody);
+
                 return res.status(200).json({ messege: 'request rejected'});
+
             } 
                 
             // update numberOfMentee of the mentor
@@ -191,6 +214,23 @@ export default class MentorRequestController {
             `;
 
             await sendEmail(mentorEmail, emailSubject, emailhtmlBody);
+
+            // send email for the user to notify the request is accepted!
+            const userEmail = requestingUser.email;
+            const userEmailSubject = "Your request for mentor is Accepted!"
+            const userEmailhtmlBody = `
+                    <html>
+                    <body>
+                        <p> Dear ${requestingUser.name} your request to Mentor ${mentorRequested.name} is <b>accepted</b>.</p>
+                        <p>contact the mentor:</p>
+                        <p><strong>Phone Number:</strong> ${mentorRequested.phoneNumber}</p>
+                        <p><strong>Email:</strong> ${mentorRequested.email}</p>
+                        <p><strong>Kindly look for another mentor and send a request.</strong></p>
+                    </body>
+                    </html>
+                `;
+    
+                await sendEmail(userEmail, userEmailSubject, userEmailhtmlBody);
 
             
         }  catch (err) {

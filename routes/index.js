@@ -1,12 +1,11 @@
 import MentorController from "../controllers/mentorcontroller.js";
 import UserController from "../controllers/usercontroller.js";
 import MentorRequestController from "../controllers/mentorrequestcontroller.js";
-import User from "../models/user.js";
 import authenticateToken from '../utils/midlewares.js';
 
 const insertRoutes = (api) => {
     // retrives list of paginated mentors
-    api.get('/mentors', MentorController.getMentors);
+    api.get('/mentors', authenticateToken, MentorController.getMentors);
 
     // retrives mentor of the specified Id
     api.get('/mentors/:id', authenticateToken, MentorController.getMentorByID);
@@ -18,7 +17,7 @@ const insertRoutes = (api) => {
     api.get('/mentor_request/:id', authenticateToken, MentorRequestController.getMentorRequestById);
 
     // updates the mentor request details with id
-    api.get('/mentor_request/:id/:status', MentorRequestController.updateRequestStatus)
+    api.get('/mentor_request/:id/:status', MentorRequestController.processRequestStatus)
 
     // create new user account with form data
     api.post('/users', UserController.postNewUser);
