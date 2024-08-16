@@ -156,7 +156,7 @@ export default class MentorRequestController {
                     <html>
                     <body>
                         <p> Dear ${requestingUser.name} your request to Mentor ${mentorRequested.name} is <b>rejected</b>.</p>
-                        <p><strong>Kindly look for another mentor and send a request.</strong></p>
+                        <p><strong>For furthe assistance contact light it Mentors</strong></p>
                     </body>
                     </html>
                 `;

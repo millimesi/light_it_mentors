@@ -21,7 +21,7 @@ async function sendEmail(sendToemail, subject, htmlBody) {
         from: 'light it mentors', // sender address
         to: sendToemail, // list of receivers
         subject: subject, // Subject line
-        text: "", // plain text body
+        text: '', // plain text body
         html: htmlBody, // html body
     }
 

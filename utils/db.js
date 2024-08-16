@@ -43,11 +43,20 @@ export default class DbClient{
     /** 
      * @description retrives list of mentors
      *  paginated with ascending order of numberOfMentee
-     * @returns {Object[]} - list of mentors from the database
+     * @returns {Object[]} - paginated list of mentors from the database
      */ 
-    async getListOfMentors () {
+    async getListOfMentors (page, limit) {
+
+        // calculate the skip for pagination
+        const skip = (page - 1) * limit
+
         try {
-            const listOfMentors = await Mentor.find({}).sort({ numberOfMentee: 1 });
+            // query the data base with asending sort, skip and limit
+            const listOfMentors = await Mentor.find({})
+            .sort({ numberOfMentee: 1 })
+            .skip(skip)
+            .limit(limit);
+
             return listOfMentors;
         } catch (err) {
             console.log(`Error: ${err}`)
