@@ -4,6 +4,8 @@ import DbClient from '../utils/db.js';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import Validator from 'Validator';
+import validator from 'Validator';
 
 
 
@@ -37,6 +39,11 @@ export default class UserController {
 
         if (!data.password) {
             return res.status(400).json({ error: 'Missing user password'})
+        }
+
+        // Validate the email
+        if (!(validator.isEmail(data.email))) {
+            return res.status(400).json({ error: 'Invalid Email'});
         }
 
         // find the user from the database and return error if it exists
@@ -181,7 +188,6 @@ export default class UserController {
             if(!(await bcrypt.compare(reqPassword, user.password))) {
                 return res.status(400).json({ error: 'incorrect password' })
             }
-
 
             // create jwt ( access token)
             const jwtpayload = { email: user.email };
