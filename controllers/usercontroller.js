@@ -5,7 +5,6 @@ import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
-import authenticateToken from '../utils/midlewares.js';
 
 
 dotenv.config();
@@ -186,7 +185,7 @@ export default class UserController {
 
             // create jwt ( access token)
             const jwtpayload = { email: user.email };
-            const accessToken = jwt.sign(jwtpayload, process.env.ACCESS_TOKEN_SECRET)             
+            const accessToken = jwt.sign(jwtpayload, process.env.ACCESS_TOKEN_SECRET)   // { expiresIn: '15m' }           
 
             res.status(200).json({ message: 'login successful', accessToken})
         } catch (err) {

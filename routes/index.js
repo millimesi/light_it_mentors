@@ -9,16 +9,16 @@ const insertRoutes = (api) => {
     api.get('/mentors', MentorController.getMentors);
 
     // retrives mentor of the specified Id
-    api.get('/mentors/:id', MentorController.getMentorByID);
+    api.get('/mentors/:id', authenticateToken, MentorController.getMentorByID);
 
     // Posts a mentor request with form data of user id and mentor Id
-    api.post('/mentor_request', MentorRequestController.postMentorRequest);
+    api.post('/mentor_request', authenticateToken, MentorRequestController.postMentorRequest);
 
     // retrives specific mentor request by Id
-    api.get('/mentor_request/:id', MentorRequestController.getMentorRequestById);
+    api.get('/mentor_request/:id', authenticateToken, MentorRequestController.getMentorRequestById);
 
     // updates the mentor request details with id
-    // api.put('/mentor_request/:id', )
+    api.get('/mentor_request/:id/:status', MentorRequestController.updateRequestStatus)
 
     // create new user account with form data
     api.post('/users', UserController.postNewUser);
@@ -30,10 +30,10 @@ const insertRoutes = (api) => {
     api.get('/users/:id', authenticateToken, UserController.getUserById)
 
     // updates the user account with specific id
-    api.put('/users/:id', UserController.updateUserById)
+    api.put('/users/:id', authenticateToken, UserController.updateUserById)
     
     // deletes the user account
-    api.delete('/users/:id', UserController.deleteById)
+    api.delete('/users/:id', authenticateToken, UserController.deleteById)
 }
 
 export default insertRoutes;

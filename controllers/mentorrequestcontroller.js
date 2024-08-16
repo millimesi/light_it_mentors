@@ -1,7 +1,8 @@
 // Manage and controlles mentor Request
 import MentorRequest from "../models/mentorRequest.js";
 import Mentor from "../models/mentor.js";
-import User from "../models/user.js"
+import User from "../models/user.js";
+import sendEmail from "../utils/emailsender.js"
 
 export default class MentorRequestController {
     /**
@@ -29,15 +30,15 @@ export default class MentorRequestController {
         // check the existance of the user and mentor
         try {
             // check if the mentor exists by the id
-            const mentorExists = await Mentor.exists({ _id: mentorId }); // returns true if it exists
+            const mentorRequested = await Mentor.findOne({ _id: mentorId }); // returns true if it exists
 
             // respond mentor id doesnt exist
-            if (!mentorExists) {
+            if (!mentorRequested) {
                 return res.status(400).json({ error: 'mentor doesnt exist'});
             }
             
             // chek if the user exists by the id
-            const userExists = await User.exists( { _id: userId })
+            const userExists = await User.exists( { _id: userId });
 
             if (!userExists) {
                 return res.status(400).json({ error: 'user doesn\'t exist'})
@@ -54,13 +55,30 @@ export default class MentorRequestController {
 
             // create the mentor request and save it to the database
             const mentorRequest = new MentorRequest(mentorRequestObj);
-
-            console.log(mentorRequest)
             const insertInfo = await mentorRequest.save();
+            
+            // send an email for the requested mentor
+            const mentorEmail = mentorRequested.email;
+            const emailSubject = "Your have new mentor request!"
+            const emailhtmlBody = `
+                <html>
+                <body>
+                    <p><b>You have a new mentor request for a user mentee ${menteeFullName}.</b></h3>
+                    <p><strong>Location:</strong> ${location}</p>
+                    <p><strong>Message:</strong> ${message}</p>
+                    <p>
+                        <a href="http://localhost:5000/mentor_request/${insertInfo._id}/accepted" style="padding: 10px 20px; background-color: #28a745; color: #fff; text-decoration: none; border-radius: 5px;">Accept Request</a>
+                        <a href="http://localhost:5000/mentor_request/${insertInfo._id}/rejected" style="padding: 10px 20px; background-color: #dc3545; color: #fff; text-decoration: none; border-radius: 5px;">Reject Request</a>
+                    </p>
+                </body>
+                </html>
+            `;
+
+            await sendEmail(mentorEmail, emailSubject, emailhtmlBody);
 
             // respond with request id and request status
             return res.status(200).json({ 
-                requestId: insertInfo._id, 
+                requestId: insertInfo._id,
                 status: insertInfo.status });
         } catch (err) {
             console.log(`Error: ${err}`);
@@ -85,6 +103,97 @@ export default class MentorRequestController {
             // if it exists respond the data
             res.status(200).json(mentorRequest);
         } catch (err) {
+            console.log(`Error: ${err}`);
+            res.status(500).json({ error: 'Server error occurred' });
+        }
+    }
+
+    static async updateRequestStatus(req, res) {
+        console.log('PUT /mentor_request/:id/:status is Accessed')
+        
+        // get the parmateres from the request
+        const { id, status } = req.params; // the status can only be accepted or rejected
+
+
+        // Validate status value
+        if (status !== 'accepted' && status !== 'rejected') {
+            return res.status(400).json({ error: 'Invalid status' });
+        }
+
+     
+        try {
+            // check if the requeste is proccessed before to be rejected, accepted and declined
+            // get the mentor request by Id
+            const getMentorRequest = await MentorRequest.findById(id);
+            const requestStatus = getMentorRequest.status
+
+            // if the status is not  one of them respond the request is processed
+            if(requestStatus !== 'pending') {
+                return res.status(409).json({ messege: 'request has been processed'})
+            }
+
+            // update the status of the mentor request
+            const updatedRequest = await MentorRequest.findByIdAndUpdate(
+                id,
+                { status: status }, 
+                { new: true }   // Return the updated document
+            );
+
+            // if the status of the updated is rejected send request rejected
+            if (updatedRequest.status === 'rejected') {
+                return res.status(200).json({ messege: 'request rejected'});
+            } 
+                
+            // update numberOfMentee of the mentor
+            const mentorId = updatedRequest.mentorId;
+
+            // find the mentor and upadte it by incrementing its numberOfMentee by one 
+            await Mentor.findByIdAndUpdate(
+                mentorId,
+                { $inc: { numberOfMentee: 1 } },  // Increment numberOfMentee by 1
+                { new: true }  // Return the updated document
+            );
+
+            /**  for accepted request send contact info for the mentor */
+            // get the user info by id and get the phoneNumber and email
+            // of the user and menteeFull name
+            const requestingUser = await User.findOne({ _id: updatedRequest.userId });
+    
+            res.status(200).json(
+                { messege: 'request Accepted',
+                    UserInfo: {
+                    menteeFullName: updatedRequest.menteeFullName,
+                    phoneNumber: requestingUser.phoneNumber,
+                    email: requestingUser.email
+                }}
+            );
+
+            // get the mentor email and send him email giving detail for the contact of user
+            const mentorRequested = await Mentor.findOne({ _id: mentorId });
+
+            // send an email for the requested mentor
+            const mentorEmail = mentorRequested.email;
+            const emailSubject = "You can find details of the request here!"
+            const emailhtmlBody = `
+                <html>
+                <body>
+                    <p> Dear Mentor contact the user and start mentoring ${updatedRequest.menteeFullName}.</h3>
+                    <p><strong>Phone Number:</strong> ${requestingUser.phoneNumber}</p>
+                    <p><strong>Email:</strong> ${requestingUser.email}</p>
+                    <p><strong>Location:</strong> ${updatedRequest.location}</p>
+                    <p><strong>Message:</strong> ${updatedRequest.message}</p>
+                    <p style="padding: 10px 20px; background-color: #28a745; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 20px; display: inline-block;">
+                        You are Trusted for Brightening the Future!
+                    </p>
+
+                </body>
+                </html>
+            `;
+
+            await sendEmail(mentorEmail, emailSubject, emailhtmlBody);
+
+            
+        }  catch (err) {
             console.log(`Error: ${err}`);
             res.status(500).json({ error: 'Server error occurred' });
         }
