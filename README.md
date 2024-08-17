@@ -1025,3 +1025,7 @@ json
 
 -   **Email Sending**: The sendEmail function is used to send notification emails. Ensure that the email service is properly configured.
 -   **Mentor and User Data**: The endpoint assumes that Mentor, User, and MentorRequest models are correctly set up and contain necessary fields.
+
+## Developed by:
+**email:** [millionmesi1@gmail.com](mailto:millionmesi1@gmail.com)
+**linkedin:** [www.linkedin.com/in/millionmeseret](www.linkedin.com/in/millionmeseret)
