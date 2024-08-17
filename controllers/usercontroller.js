@@ -19,7 +19,7 @@ export default class UserController {
      * @returns 
      */
     static async postNewUser(req, res) {
-        console.log('postNewUser is reached')
+        console.log('POST /users is Accessed')
         const data = req.body;
         // console.log(data);
         // return;
@@ -77,7 +77,7 @@ export default class UserController {
      * @param {*} res 
      */
     static async getUserById(req, res) {
-        console.log('GET /user/:id is Accessed')
+        console.log('GET /users/:id is Accessed')
 
         // Get the id from request paramete
         const id = req.params.id
