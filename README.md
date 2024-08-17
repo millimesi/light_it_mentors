@@ -18,4 +18,5 @@
 -   **200 OK:**
     -   **Response Body:**
 
-        ![](media/80c1adab551d0e2342ce289a86097cf1.PNG)
+        ![Alt Text](image-url-or-path)
+
