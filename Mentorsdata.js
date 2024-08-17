@@ -5,12 +5,12 @@ const million = {
     fatherName: 'Meseret',
     email: 'millionmesi1@gmail.com',
     password: sha1('1234'),
-    profileImage: '',
+    profileImage: 'millionProfileImage1.jpeg',
     phoneNumber: '0910120891',
     mentorType: ['Academic Tutor', 'Life Skill Mentor'],
     city: 'Jimma',
     location: 'Ferenje Arada',
-    numberOfMentee: 3,
+    numberOfMentee: 0,
     rating: 8,
     reviews: [
       {
@@ -29,14 +29,14 @@ const million = {
   const yidiya = {
     name: 'Yididia',
     fatherName: 'Meseret',
-    email: 'yididiameseret89@gmail.com',
+    email: 'yididiyameseret89@gmail.com',
     password: sha1('1234'),
-    profileImage: '',
+    profileImage: 'yididyaProfileImage1.jpeg',
     phoneNumber: '0923269367',
     mentorType: ['Academic Tutor'],
     numberOfMentee: 5,
     city: 'Jimma',
-    location: 'Ferenje Arada',
+    location: 'Ajip',
     rating: 5,
     reviews: [
       {
@@ -57,11 +57,11 @@ const million = {
     fatherName: 'Kebede',
     email: 'millimesi106@gmail.com',
     password: sha1('1234'),
-    profileImage: '',
+    profileImage: 'megaProfileImage1.jpeg',
     phoneNumber: '0912345678',
     mentorType: ['Life Skill Mentor'],
-    city: 'Addis Ababa',
-    location: 'Bole',
+    city: 'Jimma',
+    location: 'kochi',
     rating: 7,
     numberOfMentee: 2,
     reviews: [

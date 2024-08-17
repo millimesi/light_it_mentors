@@ -36,10 +36,11 @@ export default class MentorController {
                     _id: mentor._id,
                     name: mentor.name,
                     fatherName: mentor.fatherName,
-                    profileImage: mentor.profileImage,
+                    profileImage: mentor.profileImage ? `http://localhost:5000/profileImage/${mentor.profileImage}` : null,
                     mentorExpertise: mentor.mentorType,
                     city: mentor.city,
                     location: mentor.location,
+                    numberOfMentee: mentor.numberOfMentee,
                     rating: mentor.rating,
                     price: getPrice(mentor.rating),
                     revievews: mentor.revievews

@@ -23,20 +23,20 @@ async function connnectToDb() {
 }
 
 
-async function postNewUser() {
+async function populateMentors() {
     for (const mentor of mentorList ) {
 
         // find user with email
         const newMentor = new Mentor(mentor);
-        try {
-            const existingUser = await Mentor.findOne({ email: newMentor.email})
-            if (existingUser) {
-                console.log('User exists', existingUser);
-                return;
-            }
-        } catch (err) {
-            console.log(`Finding Error: ${err}`);
-        }
+        // try {
+        //     const existingUser = await Mentor.findOne({ email: newMentor.email})
+        //     if (existingUser) {
+        //         console.log('User exists', existingUser);
+        //         return;
+        //     }
+        // } catch (err) {
+        //     console.log(`Finding Error: ${err}`);
+        // }
         // Save user
         try {
             const insertInfo = await newMentor.save();
@@ -60,13 +60,13 @@ function writeToFile(fileName, data){
  ( async () => {
     await connnectToDb();
     // console.log(await User.find());
-    await MentorRequest.collection.drop();
-    // await postNewUser();
+    // await Mentor.collection.drop();
+    // await populateMentors();
     // const data = await User.find();
-    // const data = await Mentor.find();
-    const data = await MentorRequest.find();
+    const data = await Mentor.find();
+    // const data = await MentorRequest.find();
     // console.log(await MentorRequest.find())
-    writeToFile('u-requestList.txt', data);
+    writeToFile('u-mentorList.txt', data);
     mongoose.connection.close();
 }
 )();

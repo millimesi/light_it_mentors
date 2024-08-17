@@ -8,6 +8,9 @@ const api = express();
 // add request body json parser
 api.use(express.json());
 
+// serve static images from progileImage
+api.use('/profileImage', express.static('profileImage'));
+
 // insert the routes
 insertRoutes(api);
 
