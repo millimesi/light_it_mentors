@@ -47,11 +47,7 @@ The first phase of the "Light It Mentors" backend web app focuses on developing 
 1.  **Ensure Environment Variables are Configured**
     -   Create a .env file in the root of your project directory if it doesn't already exist.
     -   Add the necessary environment variables such as ACCESS_TOKEN_SECRET for JWT token signing. For example:
-
         env
-
-        Copy code
-
         ACCESS_TOKEN_SECRET=your_secret_key
 
     -   Make sure to replace your_secret_key with your actual secret key.
@@ -59,9 +55,6 @@ The first phase of the "Light It Mentors" backend web app focuses on developing 
     -   Make sure all dependencies are installed. Run the following command in your project directory:
 
         bash
-
-        Copy code
-
         npm install
 
 3.  **Dependencies:**
@@ -88,9 +81,6 @@ The first phase of the "Light It Mentors" backend web app focuses on developing 
     -   You can start your server using nodemon. The script provided in your package.json can be run with:
 
         bash
-
-        Copy code
-
         npm run start-server
 
     -   This will start the server and watch for any changes, restarting automatically as needed.
@@ -99,22 +89,14 @@ The first phase of the "Light It Mentors" backend web app focuses on developing 
         -   Example curl request:
 
             bash
-
-            Copy code
-
             curl -X POST http://localhost:5000/users/login \\
-
             \-H "Content-Type: application/json" \\
-
             \-d '{"email": "user@example.com", "password": "userpassword"}'
 
 6.  **Linting and Code Quality**
     -   Run ESLint to check for code quality and style issues. Use the following command:
 
         bash
-
-        Copy code
-
         npx eslint .
 
     -   This will lint all files in your project directory based on the rules specified in your ESLint configuration.
@@ -134,19 +116,11 @@ With these steps, you should be able to set up and run the API endpoint. If you 
     -   **Example Request:**
 
         json
-
-        Copy code
-
         {
-
         "email": "user@example.com",
-
         "name": "John Doe",
-
         "fatherName": "Doe Senior",
-
         "password": "password123"
-
         }
 
 2.  **Login:**
@@ -155,15 +129,9 @@ With these steps, you should be able to set up and run the API endpoint. If you 
     -   **Example Request:**
 
         json
-
-        Copy code
-
         {
-
         "email": "user@example.com",
-
         "password": "password123"
-
         }
 
     -   **Response:** Includes a JWT access token.
@@ -172,9 +140,6 @@ With these steps, you should be able to set up and run the API endpoint. If you 
     -   **Example Header:**
 
         makefile
-
-        Copy code
-
         Authorization: Bearer your_jwt_token
 
 4.  **Available Endpoints:**
@@ -191,21 +156,12 @@ With these steps, you should be able to set up and run the API endpoint. If you 
             -   **Example Request:**
 
                 json
-
-                Copy code
-
                 {
-
                 "mentorId": "mentor_id",
-
                 "userId": "user_id",
-
                 "menteeFullName": "Jane Doe",
-
                 "location": "New York",
-
                 "message": "Looking forward to your mentorship!"
-
                 }
 
             -   **Email Details:** Upon request submission, an email is sent to the mentor containing:
@@ -303,23 +259,13 @@ Creates a new user in the system. Requires user details to be provided in the re
 **Request:**
 
 http
-
-Copy code
-
 POST /users
-
 Content-Type: application/json
-
 {
-
 "email": "user@example.com",
-
 "name": "John Doe",
-
 "fatherName": "Michael Doe",
-
 "password": "securepassword123"
-
 }
 
 **Responses:**
@@ -331,89 +277,52 @@ Content-Type: application/json
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "email": "user@example.com",
-
 "id": "60b6c8f8a9b0c3d6f8e4c2b4"
-
 }
-
 **Error Responses:**
 
 -   Missing Email:
 
 json
-
-Copy code
-
 {
-
 "error": "Missing email"
-
 }
 
 -   Missing Name:
 
 json
-
-Copy code
-
 {
-
 "error": "Missing name"
-
 }
 
 -   Missing Father Name:
 
 json
-
-Copy code
-
 {
-
 "error": "Missing fatherName"
-
 }
 
 -   Missing Password:
 
 json
-
-Copy code
-
 {
-
 "error": "Missing user password"
-
 }
 
 -   Invalid Email:
 
 json
-
-Copy code
-
 {
-
 "error": "Invalid Email"
-
 }
 
 -   User Already Exists:
 
 json
-
-Copy code
-
 {
-
 "error": "user exists"
-
 }
 
 **Process Flow:**
@@ -452,11 +361,7 @@ Retrieves detailed information about a specific user identified by their id. Exc
 **Request:**
 
 http
-
-Copy code
-
 GET /users/:id
-
 **Responses:**
 
 -   **200 OK**: If the user details are successfully retrieved. Returns user information excluding the password.
@@ -466,57 +371,33 @@ GET /users/:id
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "user": {
-
 "_id": "60b6c8f8a9b0c3d6f8e4c2b4",
-
 "email": "user@example.com",
-
 "name": "John Doe",
-
 "fatherName": "Michael Doe",
-
 "profileImage": "http://localhost:5000/profileImage/profile1.jpg",
-
 "city": "Addis Ababa",
-
 "location": "Bole",
-
 "rating": 4.5
-
 }
 
 }
-
 **Error Response:**
 
 -   User Not Found:
 
 json
-
-Copy code
-
 {
-
 "error": "user not found"
-
 }
 
 -   Server Error:
 
 json
-
-Copy code
-
 {
-
 "error": "server error occurred"
-
 }
 
 **Process Flow:**
@@ -563,29 +444,17 @@ Updates the details of a specific user identified by their id. Allows modificati
 **Request:**
 
 http
-
-Copy code
-
 PUT /users/:id
-
-Content-Type: application/json
-
+Content-Type: application/
+json
 {
-
 "name": "John Doe",
-
 "fatherName": "Michael Doe",
-
 "email": "newemail@example.com",
-
 "profileImage": "http://localhost:5000/profileImage/newprofile.jpg",
-
 "city": "Addis Ababa",
-
 "location": "Bole",
-
 "rating": 4.7
-
 }
 
 **Responses:**
@@ -597,13 +466,7 @@ Content-Type: application/json
 **Success Response:**
 
 json
-
-Copy code
-
-{
-
 "message": "user updated successfully"
-
 }
 
 **Error Responses:**
@@ -611,25 +474,15 @@ Copy code
 -   User Not Found:
 
 json
-
-Copy code
-
 {
-
 "error": "user not found"
-
 }
 
 -   Server Error:
 
 json
-
-Copy code
-
 {
-
 "error": "server error occurred"
-
 }
 
 **Process Flow:**
@@ -679,13 +532,8 @@ Deletes a specific user identified by their id from the database.
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "message": "User deleted successfully"
-
 }
 
 **Error Responses:**
@@ -693,25 +541,15 @@ Copy code
 -   User Not Found:
 
 json
-
-Copy code
-
 {
-
 "error": "User not found"
-
 }
 
 -   Server Error:
 
 json
-
-Copy code
-
 {
-
 "error": "Server error occurred"
-
 }
 
 **Process Flow:**
@@ -749,15 +587,9 @@ Authenticates a user by verifying their email and password, and returns a JSON W
 **Request Example:**
 
 json
-
-Copy code
-
 {
-
 "email": "user@example.com",
-
 "password": "userpassword123"
-
 }
 
 **Responses:**
@@ -769,15 +601,9 @@ Copy code
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "message": "login successful",
-
 "accessToken": "your.jwt.token.here"
-
 }
 
 **Error Responses:**
@@ -785,37 +611,22 @@ Copy code
 -   User Not Found:
 
 json
-
-Copy code
-
 {
-
 "error": "user not found"
-
 }
 
 -   Incorrect Password:
 
 json
-
-Copy code
-
 {
-
 "error": "incorrect password"
-
 }
 
 -   Server Error:
 
 json
-
-Copy code
-
 {
-
 "error": "Server error occurred"
-
 }
 
 **Process Flow:**
@@ -859,77 +670,46 @@ Retrieves a paginated and sorted list of mentors, including relevant information
 
 http
 
-Copy code
-
 GET /mentors?page=1&limit=3
 
 **Responses:**
 
--   **200 OK**: If the mentors are successfully retrieved. Returns the total number of mentors and a list of mentor details.
+-   **200 OK**: If the mentors are successfully retrieved. Returns the total number of mentors and a list of mentor detai
 -   **500 Internal Server Error**: If an unexpected error occurs during the process.
 
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "totalNumOfMentors": 45,
-
 "mentorList": [
-
 {
 
 "_id": "60b6c8f8a9b0c3d6f8e4c2b4",
-
 "name": "John Smith",
-
 "fatherName": "Robert Smith",
-
 "profileImage": "http://localhost:5000/profileImage/profile1.jpg",
-
 "mentorExpertise": "Mathematics",
-
 "city": "Addis Ababa",
-
 "location": "Bole",
-
 "numberOfMentee": 10,
-
 "rating": 4.5,
-
 "price": 100,
-
 "reviews": ["Excellent mentor", "Very helpful"]
-
 },
-
 {
 
 "_id": "60b6c8f8a9b0c3d6f8e4c2b5",
-
 "name": "Jane Doe",
-
 "fatherName": "Michael Doe",
-
 "profileImage": null,
-
 "mentorExpertise": "Physics",
-
 "city": "Addis Ababa",
-
 "location": "Kirkos",
-
 "numberOfMentee": 8,
-
 "rating": 4.2,
-
 "price": 80,
-
 "reviews": ["Good explanations", "Very knowledgeable"]
-
 }
 
 // More mentors...
@@ -941,13 +721,8 @@ Copy code
 **Error Response:**
 
 json
-
-Copy code
-
 {
-
 "error": "Server error occurred"
-
 }
 
 **Process Flow:**
@@ -985,8 +760,6 @@ Retrieves detailed information about a specific mentor identified by their id. I
 
 http
 
-Copy code
-
 GET /mentors/:id
 
 **Responses:**
@@ -997,47 +770,26 @@ GET /mentors/:id
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "mentorInfo": {
-
 "_id": "60b6c8f8a9b0c3d6f8e4c2b4",
-
 "name": "John Smith",
-
 "fatherName": "Robert Smith",
-
 "profileImage": "http://localhost:5000/profileImage/profile1.jpg",
-
 "mentorExpertise": "Mathematics",
-
 "city": "Addis Ababa",
-
 "location": "Bole",
-
 "rating": 4.5,
-
 "price": 100,
-
 "reviews": ["Excellent mentor", "Very helpful"]
-
 }
-
 }
 
 **Error Response:**
 
 json
-
-Copy code
-
 {
-
 "error": "Server error occurred"
-
 }
 
 **Process Flow:**
@@ -1069,21 +821,12 @@ Creates a new mentor request. Validates the request data, checks the existence o
 **Request Body:**
 
 json
-
-Copy code
-
 {
-
 "mentorId": "60b6c8f8a9b0c3d6f8e4c2b6",
-
 "userId": "60b6c8f8a9b0c3d6f8e4c2b5",
-
 "menteeFullName": "Jane Doe",
-
 "location": "Addis Ababa",
-
 "message": "Looking for academic guidance"
-
 }
 
 **Responses:**
@@ -1095,57 +838,31 @@ Copy code
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "requestId": "60b6c8f8a9b0c3d6f8e4c2b7",
-
 "status": "pending"
-
 }
 
 **Error Responses:**
 
 json
-
-Copy code
-
 {
-
 "error": "Incomplete request data"
-
 }
 
 json
-
-Copy code
-
 {
-
 "error": "Mentor doesn't exist"
-
 }
 
 json
-
-Copy code
-
 {
-
 "error": "User doesn't exist"
-
 }
 
 json
-
-Copy code
-
 {
-
 "error": "Server error occurred"
-
 }
 
 **Process Flow:**
@@ -1183,9 +900,6 @@ Retrieves the details of a mentor request identified by its id.
 **Request:**
 
 http
-
-Copy code
-
 GET /mentor_request/:id
 
 **Responses:**
@@ -1197,49 +911,27 @@ GET /mentor_request/:id
 **Success Response:**
 
 json
-
-Copy code
-
 {
-
 "_id": "60b6c8f8a9b0c3d6f8e4c2b4",
-
 "userId": "60b6c8f8a9b0c3d6f8e4c2b5",
-
 "mentorId": "60b6c8f8a9b0c3d6f8e4c2b6",
-
 "menteeFullName": "Jane Doe",
-
 "location": "Addis Ababa",
-
 "status": "pending",
-
 "message": "Looking for academic guidance",
-
 "__v": 0
-
 }
 
 **Error Responses:**
 
 json
-
-Copy code
-
 {
-
 "error": "Mentor_request not found"
-
 }
 
 json
-
-Copy code
-
 {
-
 "error": "Server error occurred"
-
 }
 
 **Process Flow:**
@@ -1271,9 +963,6 @@ This is the core of the apis functionality it. will be accesed through the email
 **Request:**
 
 http
-
-Copy code
-
 PUT /mentor_request/:id/:status
 
 **Responses:**
@@ -1286,67 +975,37 @@ PUT /mentor_request/:id/:status
 **Success Response (Accepted):**
 
 json
-
-Copy code
-
 {
-
 "message": "Request Accepted",
-
 "UserInfo": {
-
 "menteeFullName": "John Doe",
-
 "phoneNumber": "+1234567890",
-
 "email": "john.doe@example.com"
-
 }
-
 }
 
 **Success Response (Rejected):**
 
 json
-
-Copy code
-
 {
-
 "message": "Request Rejected"
-
 }
 
 **Error Response:**
 
 json
-
-Copy code
-
 {
-
 "error": "Invalid status"
-
 }
 
 json
-
-Copy code
-
 {
-
 "message": "Request has been processed"
-
 }
 
 json
-
-Copy code
-
 {
-
 "error": "Server error occurred"
-
 }
 
 **Process Flow:**
