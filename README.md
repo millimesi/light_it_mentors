@@ -18,5 +18,5 @@
 -   **200 OK:**
     -   **Response Body:**
 
-        ![Alt Text](image-url-or-path)
+        ![Alt Text](GETmentors.PNG)
 
