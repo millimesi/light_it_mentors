@@ -1,9 +1,32 @@
-### Light it Mentors Backend web-App Phase I
+**Light it Mentors Backend web-App Phase I**
+**List of Content**
+- [Introduction to Light It Mentors](#introduction-to-light-it-mentors)
+- [Scope of This Project](#scope-of-this-project)
+- [Setup Instructions](#setup-instructions)
+- [Overview of the Project Architecture](#overview-of-the-project-architecture)
+  - [Project Structure](#project-structure)
+  - [Main Components](#main-components)
+  - [Workflow](#workflow)
+  - [Dependencies](#dependencies)
+- [API Endpoint Documentation](#api-endpoint-documentation)
+  - [POST /users](#endpoint-post-users)
+  - [GET /users/:id](#endpoint-get-usersid)
+  - [PUT /users/:id](#endpoint-put-usersid)
+  - [DELETE /users/:id](#endpoint-delete-usersid)
+  - [POST /users/login](#endpoint-post-userslogin)
+  - [GET /mentors](#endpoint-get-mentors)
+  - [GET /mentors/:id](#endpoint-get-mentorsid)
+  - [GET /mentor_request/:id](#endpoint-get-mentor_requestid)
+  - [PUT /mentor_request/:id/:status](#endpoint-put-mentor_requestidstatus)
 
-### Light It PLC is a forward-thinking startup in Ethiopia dedicated to addressing the educational and developmental challenges faced by the younger generation. By offering a comprehensive suite of services, including mentorship, structured events, and engaging content, Light It PLC aims to bridge the gap in the current education system and provide holistic guidance to children and youth. Leveraging modern technology, such as web and mobile applications, the company fosters a supportive community for students, parents, and educators, ensuring that every child has the tools to define and achieve their ambitions.
+# Light it Mentors Backend web-App Phase I
 
-![Project Scope Diagram](readmeImages/lightit.png)
+## Intrioducton to Ligh it
+Light It PLC is a forward-thinking startup in Ethiopia dedicated to addressing the educational and developmental challenges faced by the younger generation. By offering a comprehensive suite of services, including mentorship, structured events, and engaging content, Light It PLC aims to bridge the gap in the current education system and provide holistic guidance to children and youth. Leveraging modern technology, such as web and mobile applications, the company fosters a supportive community for students, parents, and educators, ensuring that every child has the tools to define and achieve their ambitions.
 
+![initial logo of light it](readmeImages/lightit.png)
+
+## Scope of this project
 The first phase of the "Light It Mentors" backend web app focuses on developing the core APIs to connect users with mentors.
 
 **Included in the Project Scope:**
@@ -19,7 +42,7 @@ The first phase of the "Light It Mentors" backend web app focuses on developing 
 
 ![Project Scope Diagram](readmeImages/phase1.PNG)
 
-### Setup Instructions
+## Setup Instructions
 
 1.  **Ensure Environment Variables are Configured**
     -   Create a .env file in the root of your project directory if it doesn't already exist.
@@ -101,7 +124,7 @@ The first phase of the "Light It Mentors" backend web app focuses on developing 
 
 With these steps, you should be able to set up and run the API endpoint. If you encounter any issues, make sure to check the logs and error messages for more details.
 
-### Usage Guidelines
+## Usage Guidelines
 
 **Overview:** This backend app provides endpoints for user management and mentor requests. To interact with the app, follow these guidelines:
 
@@ -197,9 +220,9 @@ With these steps, you should be able to set up and run the API endpoint. If you 
 
 By following these guidelines, users can interact with the backend app effectively, manage mentors, handle user accounts, make mentor requests, and receive relevant notifications.
 
-### Overview of the Project Architecture
+## Overview of the Project Architecture
 
-**1. Project Structure:**
+### **1. Project Structure:**
 
 The project is designed to support a mentorship platform with various functionalities for managing users, mentors, and mentor requests. The architecture includes:
 
@@ -212,7 +235,7 @@ The project is designed to support a mentorship platform with various functional
     -   **JWT (JSON Web Tokens)** is used for user authentication and authorization.
     -   Users must authenticate to receive an access token, which is required for accessing protected endpoints.
 
-**2. Main Components:**
+### **2. Main Components:**
 
 -   **Server Setup:**
     -   **server.js**: Entry point for the application. Sets up the Express server, connects to MongoDB, and configures middleware.
@@ -228,7 +251,7 @@ The project is designed to support a mentorship platform with various functional
 -   **Email Integration:**
     -   **Nodemailer:** Used to send email notifications to mentors when a request is made, including links for accepting or rejecting the request.
 
-**3. Workflow:**
+### **3. Workflow:**
 
 1.  **User Registration and Login:**
     -   Users register by providing their details. On successful registration, they can log in to obtain a JWT access token.
@@ -242,7 +265,7 @@ The project is designed to support a mentorship platform with various functional
 4.  **Error Handling and Responses:**
     -   The system handles various error scenarios, such as missing data or invalid credentials, and returns appropriate error messages and status codes.
 
-**4. Dependencies:**
+### **4. Dependencies:**
 
 -   **Core Dependencies:**
     -   bcrypt: For password hashing.
@@ -262,7 +285,7 @@ The project is designed to support a mentorship platform with various functional
 
 This architecture ensures a scalable, maintainable backend system for managing users, mentors, and mentor requests, with secure authentication and effective communication through email notifications.
 
-**API Endpoint Documentation**
+## **API Endpoint Documentation**
 
 ### Endpoint: POST /users
 
@@ -1235,11 +1258,10 @@ Copy code
 
 ### 
 
-### Endpoint: PUT /mentor_request/:id/:status
+### Endpoint: GET /mentor_request/:id/:status
 
 **Description:**
-
-Updates the status of a mentor request identified by its id. The status can be updated to either accepted or rejected. Based on the status, the endpoint also sends notification emails to both the requesting user and the mentor.
+This is the core of the apis functionality it. will be accesed through the email sent to the mentor. It process status of a mentor request identified by its id. The status can be updated to either accepted or rejected. Based on the status, the endpoint also sends notification emails to both the requesting user and the mentor.
 
 **URL Parameters:**
 
