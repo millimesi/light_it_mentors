@@ -16,6 +16,7 @@
   - [POST /users/login](#endpoint-post-userslogin)
   - [GET /mentors](#endpoint-get-mentors)
   - [GET /mentors/:id](#endpoint-get-mentorsid)
+  - [POST /mentor_request](endpoint-POST-mentor_request)
   - [GET /mentor_request/:id](#endpoint-get-mentor_requestid)
   - [PUT /mentor_request/:id/:status](#endpoint-put-mentor_requestidstatus)
 
@@ -466,6 +467,7 @@ json
 **Success Response:**
 
 json
+{
 "message": "user updated successfully"
 }
 
