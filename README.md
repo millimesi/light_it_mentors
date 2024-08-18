@@ -18,7 +18,7 @@
   - [GET /mentors/:id](#endpoint-get-mentorsid)
   - [POST /mentor_request](endpoint-POST-mentor_request)
   - [GET /mentor_request/:id](#endpoint-get-mentor_requestid)
-  - [PUT /mentor_request/:id/:status](#endpoint-put-mentor_requestidstatus)
+  - [GET /mentor_request/:id/:status](#endpoint-put-mentor_requestidstatus)
 
 # Light it Mentors Backend web-App Phase I
 
@@ -965,7 +965,7 @@ This is the core of the apis functionality it. will be accesed through the email
 **Request:**
 
 http
-PUT /mentor_request/:id/:status
+GET /mentor_request/:id/:status
 
 **Responses:**
 
