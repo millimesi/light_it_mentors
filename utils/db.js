@@ -13,7 +13,7 @@ export default class DbClient{
         // conect to the data base
         mongoose.connect(dbUrl)
             .then(() => {
-                console.log(`connection is established - readyState: ${mongoose.connection.readyState}`)
+                console.log(`Database connection is established. readyState: ${mongoose.connection.readyState}`)
             })
             .catch((error) => console.log(`Connection Error: ${error}`))
 

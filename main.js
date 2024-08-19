@@ -60,13 +60,13 @@ function writeToFile(fileName, data){
  ( async () => {
     await connnectToDb();
     // console.log(await User.find());
-    // await Mentor.collection.drop();
+    await User.collection.drop();
     // await populateMentors();
-    // const data = await User.find();
-    const data = await Mentor.find();
+    const data = await User.find();
+    // const data = await Mentor.find();
     // const data = await MentorRequest.find();
     // console.log(await MentorRequest.find())
-    writeToFile('u-mentorList.txt', data);
+    writeToFile('u-userList.txt', data);
     mongoose.connection.close();
 }
 )();

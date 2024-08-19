@@ -225,7 +225,7 @@ export default class MentorRequestController {
                         <p>contact the mentor:</p>
                         <p><strong>Phone Number:</strong> ${mentorRequested.phoneNumber}</p>
                         <p><strong>Email:</strong> ${mentorRequested.email}</p>
-                        <p><strong>Kindly look for another mentor and send a request.</strong></p>
+                        <p><strong>Reach us for further assistance </strong></p>
                     </body>
                     </html>
                 `;

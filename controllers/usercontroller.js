@@ -42,9 +42,9 @@ export default class UserController {
         }
 
         // Validate the email
-        if (!(validator.isEmail(data.email))) {
-            return res.status(400).json({ error: 'Invalid Email'});
-        }
+        // if (!(validator.isEmail(data.email))) {
+        //     return res.status(400).json({ error: 'Invalid Email'});
+        // }
 
         // find the user from the database and return error if it exists
         try {
