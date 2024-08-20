@@ -3,7 +3,8 @@ import MentorRequest from "../models/mentorRequest.js";
 import Mentor from "../models/mentor.js";
 import User from "../models/user.js";
 import sendEmail from "../utils/emailsender.js";
-import { addEmailJob } from "../utils/bullJobs.js";
+import { addEmailJob, addDeclineRequestJob } from "../utils/bullJobs.js";
+
 
 export default class MentorRequestController {
     /**
@@ -76,6 +77,10 @@ export default class MentorRequestController {
             `;
 
             await addEmailJob(mentorEmail, emailSubject, emailhtmlBody);
+
+            // if the request is not proccessed with the given time it will be declined by light it
+            console.log(insertInfo._id)
+            await addDeclineRequestJob(insertInfo._id); 
 
             // respond with request id and request status
             return res.status(200).json({ 

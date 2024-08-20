@@ -33,7 +33,7 @@ async function sendEmail(sendToemail, subject, htmlBody) {
     try {
         // send the email
         await transporter.sendMail(message);
-        console.log('email is sent')
+        console.log(`email is sent to ${message.to}`)
     } catch (err) {
         console.log(err);
     }
