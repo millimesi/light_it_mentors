@@ -2,7 +2,8 @@
 import MentorRequest from "../models/mentorRequest.js";
 import Mentor from "../models/mentor.js";
 import User from "../models/user.js";
-import sendEmail from "../utils/emailsender.js"
+import sendEmail from "../utils/emailsender.js";
+import { addEmailJob } from "../utils/bullJobs.js";
 
 export default class MentorRequestController {
     /**
@@ -74,7 +75,7 @@ export default class MentorRequestController {
                 </html>
             `;
 
-            await sendEmail(mentorEmail, emailSubject, emailhtmlBody);
+            await addEmailJob(mentorEmail, emailSubject, emailhtmlBody);
 
             // respond with request id and request status
             return res.status(200).json({ 
@@ -129,7 +130,7 @@ export default class MentorRequestController {
 
             // if the status is not  one of them respond the request is processed
             if(requestStatus !== 'pending') {
-                return res.status(409).json({ messege: 'request has been processed'})
+                return res.status(409).json({ messege: `request is ${requestStatus}`})
             }
 
             // update the status of the mentor request
@@ -156,12 +157,12 @@ export default class MentorRequestController {
                     <html>
                     <body>
                         <p> Dear ${requestingUser.name} your request to Mentor ${mentorRequested.name} is <b>rejected</b>.</p>
-                        <p><strong>For furthe assistance contact light it Mentors</strong></p>
+                        <p><strong>For furthe assistance contact light it Mentors!</strong></p>
                     </body>
                     </html>
                 `;
     
-                await sendEmail(userEmail, emailSubject, emailhtmlBody);
+                await addEmailJob(userEmail, emailSubject, emailhtmlBody);
 
                 return res.status(200).json({ messege: 'request rejected'});
 
@@ -213,7 +214,7 @@ export default class MentorRequestController {
                 </html>
             `;
 
-            await sendEmail(mentorEmail, emailSubject, emailhtmlBody);
+            await addEmailJob(mentorEmail, emailSubject, emailhtmlBody);
 
             // send email for the user to notify the request is accepted!
             const userEmail = requestingUser.email;
@@ -225,12 +226,12 @@ export default class MentorRequestController {
                         <p>contact the mentor:</p>
                         <p><strong>Phone Number:</strong> ${mentorRequested.phoneNumber}</p>
                         <p><strong>Email:</strong> ${mentorRequested.email}</p>
-                        <p><strong>Reach us for further assistance </strong></p>
+                        <p><strong>Reach us for further assistance!</strong></p>
                     </body>
                     </html>
                 `;
     
-                await sendEmail(userEmail, userEmailSubject, userEmailhtmlBody);
+                await addEmailJob(userEmail, userEmailSubject, userEmailhtmlBody);
 
             
         }  catch (err) {

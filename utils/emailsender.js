@@ -3,7 +3,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
+/**
+ * @description
+ * @param {String} htmlBody -
+ * @param {String} subject -
+ * @param {String} sendToemail -
+ */
 async function sendEmail(sendToemail, subject, htmlBody) {
     // gmail configuration for the tansporter
     const config = {
@@ -35,6 +40,3 @@ async function sendEmail(sendToemail, subject, htmlBody) {
 }
 
 export default sendEmail;
-// (async()=> {
-//     await sendEmail(receiverEmail);
-// })();
